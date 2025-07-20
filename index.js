@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
   const token = req.query['hub.verify_token'];
   const challenge = req.query['hub.challenge'];
 
-  if (mode === 'subscribe' && token === 'mySecretToken 123') {
+  if (mode === 'subscribe' && token === 'investwithintent7287') {
     console.log('Webhook verified');
     res.status(200).send(challenge);
   } else {
