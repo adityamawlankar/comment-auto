@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Use a secure token to verify requests from Meta
-const VERIFY_TOKEN = "mySecretToken123";  // Change this to a strong secret
+// Your Meta verify token
+const VERIFY_TOKEN = "mySecretToken123"; // Make sure this matches what you put on Meta
 
 app.use(express.json());
 
-// GET: Webhook verification
+// GET route for webhook verification
 app.get("/webhook", (req, res) => {
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
@@ -22,15 +22,14 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-// POST: Receive Instagram events
+// POST route to receive Instagram events
 app.post("/webhook", (req, res) => {
   console.log("📩 Event received for @invest_with_intent:");
   console.dir(req.body, { depth: null });
-
-  // You can add logic here to filter events related to your account
-  // For example: Check if the event is from your page ID or IG user ID
-
   res.sendStatus(200);
 });
 
-app.listen(PORT, () =>
+// Start the server
+app.listen(PORT, () => {
+  console.log(`🚀 Webhook server is running on port ${PORT}`);
+});
